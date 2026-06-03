@@ -43,7 +43,6 @@ Include the following:
 -   Why is this relevant? [@smith2020]
 
 -   ...
-something
 # Part 2 - Data Sourcing
 
 ## 2.1 Load in the data
