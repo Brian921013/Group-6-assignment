@@ -141,6 +141,7 @@ saveRDS(gdp_10countries, "gdp_10countries.rds")
 Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
 
 
+
 ```{r}
 
 library(readr)
