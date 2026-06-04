@@ -1,5 +1,5 @@
 ---
-title: "Template"
+title: "GDP and life expectancy globally between countries over the years"
 author: "Studentnames and studentnumbers here"
 date: "`r Sys.Date()`"
 output: pdf_document
@@ -31,13 +31,11 @@ A new sentence
 Include your names
 
 Include the tutorial group number
-
+3.6
 Include your tutorial lecturer's name
-
+Chantal Schouwenaar
 # Part 1 - Identify a Social Problem
-
 Use APA referencing throughout your document. [Here's a link to some explanation.](https://www.mendeley.com/guides/apa-citation-guide/)
-
 ## 1.1 Describe the Social Problem
 
 Include the following:
@@ -45,7 +43,6 @@ Include the following:
 -   Why is this relevant? [@smith2020]
 
 -   ...
-
 # Part 2 - Data Sourcing
 
 ## 2.1 Load in the data
