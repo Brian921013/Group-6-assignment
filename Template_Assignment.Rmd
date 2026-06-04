@@ -195,6 +195,7 @@ life_expectancy_10countries <- life_select %>%
 
 View(life_expectancy_10countries)
 
+saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 ```
 
