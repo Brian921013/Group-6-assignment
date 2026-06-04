@@ -145,12 +145,61 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 ```{r}
 
 library(readr)
-Life Expectancy <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", 
+Life Expectancy raw data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", 
 skip = 3)
 
+#changing the name of data life expectancy
+
+life_raw <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", skip = 3)
+
+View(life_raw)
+
+#installing package
+
+install.packages("tidyverse")
+
+#filtering 5 years for life expectancy
+
+library(tidyverse)
+library(dplyr)
+
+life_select <- life_raw %>%
+  select(
+    country = "Country Name",
+    country_code = "Country Code",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023")
+
+View(life_selected)
+
+#filtering 10 countries for life expectancy
+
+selected_countries <- c(
+  "USA",
+  "NLD",
+  "DEU",
+  "JPN",
+  "CHN",
+  "IND",
+  "BRA",
+  "ZAF",
+  "NGA",
+  "AUS"
+)
+
+life_expectancy_10countries <- life_select %>%
+  filter(country_code %in% selected_countries)
+
+View(life_expectancy_10countries)
 
 
 ```
+
+
+
 
 
 ## 3.2 Generate necessary variables
