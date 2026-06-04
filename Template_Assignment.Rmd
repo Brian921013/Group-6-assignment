@@ -106,6 +106,18 @@ mean(dataset$percollege)
 
 Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
 
+
+```{r}
+
+library(readr)
+Life Expectancy <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", 
+skip = 3)
+
+
+
+```
+
+
 ## 3.2 Generate necessary variables
 
 Variable 1
