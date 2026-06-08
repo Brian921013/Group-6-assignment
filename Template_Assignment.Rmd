@@ -145,8 +145,7 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 ```{r}
 
 library(readr)
-Life Expectancy raw data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", 
-skip = 3)
+Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
 
 #changing the name of data life expectancy
 
@@ -173,7 +172,7 @@ life_select <- life_raw %>%
     "2022",
     "2023")
 
-View(life_selected)
+View(life_select)
 
 #filtering 10 countries for life expectancy
 
@@ -202,6 +201,57 @@ saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 
 
+
+
+```{r}
+#merge the data and make the plots
+install.packages("tidyverse")
+library(tidyverse)
+
+gdp_10countries <- readRDS("gdp_10countries.rds")
+
+life_expectancy_10countries <- readRDS("life_expectancy.rds")
+View(gdp_10countries)
+
+View(life_expectancy_10countries)
+
+#Convert GDP data to long format
+gdp_long <- gdp_10countries %>%
+  pivot_longer(
+    cols = `2019`:`2023`,
+    names_to = "year",
+    values_to = "gdp_per_capita"
+  )
+View(gdp_long)
+
+#Convert life expectancy data to long format
+life_long <- life_expectancy_10countries %>%
+  pivot_longer(
+    cols = `2019`:`2023`,
+    names_to = "year",
+    values_to = "life_expectancy"
+  )
+View(life_long)
+
+#combine 2 data sets
+combined_data <- gdp_long %>%
+  left_join(
+    life_long,
+    by = c("country", "country_code", "year")
+  ) %>%
+  mutate(
+    year = as.numeric(year)
+  )
+view(combined_data)
+
+saveRDS(
+  combined_data,
+  "combined_data.rds"
+)
+
+#makeing the scatter plot
+
+```
 
 ## 3.2 Generate necessary variables
 
