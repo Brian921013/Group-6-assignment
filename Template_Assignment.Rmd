@@ -10,11 +10,14 @@ csl: apa.csl
 
 # Set-up your environment
 
-```{r package_install, include=FALSE}
+# {r package_install, include=FALSE}
 install.packages("tidyverse")
 install.packages("WDI")
 install.packages("tmap")
 
+```
+
+```{r packages}
 require(tidyverse)
 require(rmarkdown)
 require(yaml)
@@ -245,6 +248,33 @@ saveRDS(
   combined_data,
   "combined_data.rds"
 )
+
+```{r}
+#plotting average of 10 countries life expectancy
+library(ggplot2)
+library(dplyr)
+
+# Calculate average life expectancy per year
+avg_life <- combined_data %>%
+  group_by(year) %>%
+  summarise(
+    avg_life_expectancy = mean(life_expectancy, na.rm = TRUE)
+  )
+# Plot
+ggplot(avg_life, aes(x = year, y = avg_life_expectancy)) +
+  geom_line(color = "darkgreen", linewidth = 1.2) +
+  geom_point(size = 3) +
+  theme_minimal() +
+  labs(
+    title = "Average Life Expectancy of 10 Countries (2019–2023)",
+    x = "Year",
+    y = "Average Life Expectancy"
+  )
+```
+
+
+
+
 
 #makeing the scatter plot
 
