@@ -141,7 +141,12 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 ```{r}
 
 library(readr)
+<<<<<<< Updated upstream
 Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
+=======
+Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", 
+skip = 3)
+>>>>>>> Stashed changes
 
 #changing the name of data life expectancy
 
@@ -305,6 +310,13 @@ Variable 2
 ```
 
 Here you provide a description of why the plot above is relevant to your specific social problem.
+
+
+
+
+
+
+```
 
 ## 3.5 Visualize sub-population variation
 
