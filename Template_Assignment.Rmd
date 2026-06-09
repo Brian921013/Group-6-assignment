@@ -10,14 +10,10 @@ csl: apa.csl
 
 # Set-up your environment
 
-# {r package_install, include=FALSE}
+```{r package_install, include=FALSE}
 install.packages("tidyverse")
 install.packages("WDI")
 install.packages("tmap")
-
-```
-
-```{r packages}
 require(tidyverse)
 require(rmarkdown)
 require(yaml)
@@ -205,7 +201,7 @@ saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 ```{r}
 #merge the data and make the plots
-install.packages("tidyverse")
+#install.packages("tidyverse")
 library(tidyverse)
 
 gdp_10countries <- readRDS("gdp_10countries.rds")
@@ -248,6 +244,8 @@ saveRDS(
   combined_data,
   "combined_data.rds"
 )
+```
+
 
 ```{r}
 #plotting average of 10 countries life expectancy
