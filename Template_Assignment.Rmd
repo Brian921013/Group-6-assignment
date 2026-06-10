@@ -26,20 +26,34 @@ library(readxl)
 A new sentence
 Include your names
 
-Include the tutorial group number
-3.6
-Include your tutorial lecturer's name
-Chantal Schouwenaar
+Tutorial group: 3.6
+
+Tutorial lecturer: Chantal Schouwenaar
+
 # Part 1 - Identify a Social Problem
-Use APA referencing throughout your document. [Here's a link to some explanation.](https://www.mendeley.com/guides/apa-citation-guide/)
+
 ## 1.1 Describe the Social Problem
 
-Include the following:
+Differences in life expectancy between countries are one of the clearest forms of 
+global inequality. A child born in a high-income country can expect to live around 
+fifteen to twenty years longer than a child born in a low-income country, and this 
+gap has persisted for decades. The classic explanation links population health to 
+national income: @preston1975 showed that life expectancy rises steeply with GDP 
+per capita at low income levels and flattens among richer countries, which implies 
+that economic growth buys the most health where countries are poorest [@deaton2003]. 
+A key lever for policy is therefore knowing how tightly health follows income, 
+because that determines whether health gaps should be fought with economic 
+development, with health spending, or both.
 
--   Why is this relevant? [@smith2020]
+What is less well established is how this relationship behaves during a global 
+shock. The COVID-19 pandemic caused the first worldwide drop in life expectancy 
+in decades, and the losses were very unequal between countries [@schoeley2022], 
+yet income alone did not fully predict who lost the most. In this report we 
+quantify the relationship between GDP per capita and life expectancy for ten 
+countries across all income levels between 2019 and 2023, and we examine how 
+life expectancy changed around the 2020 outbreak of the COVID-19 pandemic.
 
--   ...
-# Part 2 - Data Sourcing
+# Part 2 - Data Sourcing<
 
 ## 2.1 Load in the data
 
