@@ -1,12 +1,15 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
-author: "Studentnames and studentnumbers here"
+author: 
 date: "`r Sys.Date()`"
 output: pdf_document
 bibliography: references.bib
 csl: apa.csl
 
 ---
+
+Thea von Sydow 2882066
+
 
 # Set-up your environment
 
@@ -38,16 +41,16 @@ Differences in life expectancy between countries are one of the clearest forms o
 global inequality. A child born in a high-income country can expect to live around 
 fifteen to twenty years longer than a child born in a low-income country, and this 
 gap has persisted for decades. The classic explanation links population health to 
-national income: @preston1975 showed that life expectancy rises steeply with GDP 
+national income: (Preston, 1975) showed that life expectancy rises steeply with GDP 
 per capita at low income levels and flattens among richer countries, which implies 
-that economic growth buys the most health where countries are poorest [@deaton2003]. 
+that economic growth buys the most health where countries are poorest (Deaton, 2003)]. 
 A key lever for policy is therefore knowing how tightly health follows income, 
 because that determines whether health gaps should be fought with economic 
 development, with health spending, or both.
 
 What is less well established is how this relationship behaves during a global 
 shock. The COVID-19 pandemic caused the first worldwide drop in life expectancy 
-in decades, and the losses were very unequal between countries [@schoeley2022], 
+in decades, and the losses were very unequal between countries (Schöley, 2022), 
 yet income alone did not fully predict who lost the most. In this report we 
 quantify the relationship between GDP per capita and life expectancy for ten 
 countries across all income levels between 2019 and 2023, and we examine how 
@@ -365,4 +368,12 @@ Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
-Use APA referencing throughout your document.
+Cutler, D., Deaton, A., & Lleras-Muney, A. (2006). The determinants of mortality. Journal of Economic Perspectives, 20(3), 97–120. https://doi.org/10.1257/jep.20.3.97
+
+Deaton, A. (2003). Health, inequality, and economic development. Journal of Economic Literature, 41(1), 113–158. https://doi.org/10.1257/002205103321544710
+
+Preston, S. H. (1975). The changing relation between mortality and level of economic development. Population Studies, 29(2), 231–248. https://doi.org/10.1080/00324728.1975.10410201
+
+Schöley, J., Aburto, J. M., Kashnitsky, I., Kniffka, M. S., Zhang, L., Jaadla, H., Dowd, J. B., & Kashyap, R. (2022). Life expectancy changes since COVID-19. Nature Human Behaviour, 6, 1649–1659. https://doi.org/10.1038/s41562-022-01450-3
+
+World Health Organization. (2023). World health statistics 2023: Monitoring health for the SDGs. https://www.who.int/publications/i/item/9789240074323
