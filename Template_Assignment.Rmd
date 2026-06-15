@@ -1,11 +1,10 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
-author: 
+author: "null"
 date: "`r Sys.Date()`"
-output: pdf_document
-bibliography: references.bib
-csl: apa.csl
-
+output:
+  html_document:
+    df_print: paged
 ---
 
 Thea von Sydow 2882066
@@ -14,9 +13,9 @@ Thea von Sydow 2882066
 # Set-up your environment
 
 ```{r package_install, include=FALSE}
-install.packages("tidyverse")
-install.packages("WDI")
-install.packages("tmap")
+#install.packages("tidyverse")
+#install.packages("WDI")
+#install.packages("tmap")
 require(tidyverse)
 require(rmarkdown)
 require(yaml)
@@ -62,32 +61,29 @@ life expectancy changed around the 2020 outbreak of the COVID-19 pandemic.
 
 Preferably from a URL, but if not, make sure to download the data and store it in a shared location that you can load the data in from. Do not store the data in a folder you include in the Github repository!
 
-```{r loading_data}
+```{r loading_data, include=FALSE}
 #dataset <- midwest
 
 library(readr)
 #Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800 <- #read_delim("~/Downloads/Gezondheid__leefstijl__zorggebruik_en__aanbod__doodsoorzaken__kerncijfers_03062026_132800.csv", 
 #    delim = ";", escape_double = FALSE, trim_ws = TRUE, 
 #    skip = 4)
-#View(Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800)
+###View(Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800)
 
 #write_csv(Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800, "data/gezondheid.csv")
 
-a_fun_name <- read_delim("data/gezondheid.csv")
+#a_fun_name <- read_delim("data/gezondheid.csv")
 
-a_fun_name$...1 <- NULL
+#a_fun_name$...1 <- NULL
 
 
-write_csv(a_fun_name, "data/gezondheid_changed.csv")
+#write_csv(a_fun_name, "data/gezondheid_changed.csv")
 ```
 
 midwest is an example dataset included in the tidyverse package
 
 ## 2.2 Provide a short summary of the dataset(s)
 
-```{r}
-head(dataset)
-```
 
 In this case we see 28 variables, but we miss some information on what units they are in. We also don't know anything about the year/moment in which this data has been captured.
 
@@ -98,7 +94,7 @@ In this case we see 28 variables, but we miss some information on what units the
 library(readr)
 API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 <- read_csv("API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv", 
     skip = 3)
-View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
+###View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
 
 #change data name:
 library(readr)
@@ -108,7 +104,7 @@ gdp_raw <- read_csv(
   skip = 3
 )
 
-View(gdp_raw)
+###View(gdp_raw)
 
 # cleaning the data for 10 countries and 5 years
 library(dplyr)
@@ -124,7 +120,6 @@ gdp_selected <- gdp_raw %>%
     `2023`
   )
 
-View(gdp_selected)
 
 #Filter selected countries
 selected_countries <- c(
@@ -143,7 +138,6 @@ selected_countries <- c(
 gdp_10countries <- gdp_selected %>%
   filter(country_code %in% selected_countries)
 
-View(gdp_10countries)
 
 
 saveRDS(gdp_10countries, "gdp_10countries.rds")
@@ -164,11 +158,6 @@ Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_26
 
 life_raw <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", skip = 3)
 
-View(life_raw)
-
-#installing package
-
-install.packages("tidyverse")
 
 #filtering 5 years for life expectancy
 
@@ -185,7 +174,6 @@ life_select <- life_raw %>%
     "2022",
     "2023")
 
-View(life_select)
 
 #filtering 10 countries for life expectancy
 
@@ -205,7 +193,6 @@ selected_countries <- c(
 life_expectancy_10countries <- life_select %>%
   filter(country_code %in% selected_countries)
 
-View(life_expectancy_10countries)
 
 saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
@@ -224,9 +211,8 @@ library(tidyverse)
 gdp_10countries <- readRDS("gdp_10countries.rds")
 
 life_expectancy_10countries <- readRDS("life_expectancy.rds")
-View(gdp_10countries)
+##View(gdp_10countries)
 
-View(life_expectancy_10countries)
 
 #Convert GDP data to long format
 gdp_long <- gdp_10countries %>%
@@ -235,7 +221,6 @@ gdp_long <- gdp_10countries %>%
     names_to = "year",
     values_to = "gdp_per_capita"
   )
-View(gdp_long)
 
 #Convert life expectancy data to long format
 life_long <- life_expectancy_10countries %>%
@@ -244,7 +229,6 @@ life_long <- life_expectancy_10countries %>%
     names_to = "year",
     values_to = "life_expectancy"
   )
-View(life_long)
 
 #combine 2 data sets
 combined_data <- gdp_long %>%
@@ -255,7 +239,6 @@ combined_data <- gdp_long %>%
   mutate(
     year = as.numeric(year)
   )
-view(combined_data)
 
 saveRDS(
   combined_data,
@@ -286,15 +269,111 @@ ggplot(avg_life, aes(x = year, y = avg_life_expectancy)) +
     y = "Average Life Expectancy"
   )
 ggsave("average_life_expectancy.png", width = 8, height = 5, dpi = 300)
+
+#explanation:Average life expectancy across the ten selected countries declined from approximately 75.3 years in 2019 to 74.0 years in 2021. It subsequently recovered and reached approximately 75.5 years in 2023. The decline coincides with the COVID-19 pandemic period, although this descriptive figure alone cannot establish a causal relationship.
 ```
 
 
 
+```{r}
+#Spatial variation visualised
+
+combined_data <- readRDS("combined_data.rds")
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(countrycode)
+library(scales)
+
+combined_data <- readRDS("combined_data.rds")
+
+latest_year <- max(combined_data$year, na.rm = TRUE)
+
+map_data <- combined_data %>%
+  filter(year == latest_year) %>%
+  mutate(
+    iso3 = countrycode(
+      country,
+      origin = "country.name",
+      destination = "iso3c"
+    )
+  )
+
+world <- ne_countries(
+  scale = "medium",
+  returnclass = "sf"
+)
+
+world_gdp <- world %>%
+  left_join(
+    map_data,
+    by = c("iso_a3" = "iso3")
+  )
+
+country_labels <- world_gdp %>%
+  filter(!is.na(gdp_per_capita)) %>%
+  st_point_on_surface()
+
+gdp_map <- ggplot(world_gdp) +
+  geom_sf(
+    aes(fill = gdp_per_capita),
+    linewidth = 0.15
+  ) +
+  geom_sf_text(
+    data = country_labels,
+    aes(
+      label = paste0(
+        name_long,
+        "\nLE: ",
+        round(life_expectancy, 1),
+        " years"
+      )
+    ),
+    size = 2.5,
+    check_overlap = TRUE
+  ) +
+  scale_fill_viridis_c(
+    labels = label_dollar(
+      accuracy = 1,
+      big.mark = ","
+    ),
+    na.value = "grey90",
+    name = "GDP per capita\n(US$)"
+  ) +
+  labs(
+    title = paste0(
+      "GDP per Capita Across 10 Selected Countries (",
+      latest_year,
+      ")"
+    ),
+    subtitle = "Map colours indicate GDP per capita; labels show life expectancy",
+    caption = "Source: cleaned and merged dataset. Authors' own calculations."
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = "right"
+  )
+
+gdp_map
+
+dir.create("output", showWarnings = FALSE)
+
+ggsave(
+  "gdp_per_capita_map.png",
+  plot = gdp_map,
+  width = 13,
+  height = 7,
+  dpi = 300
+)
+```
 
 
 #makeing the scatter plot
-
-```
 
 ## 3.2 Generate necessary variables
 
@@ -326,23 +405,52 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 ## 3.5 Visualize sub-population variation
 
+The graph highlights a clear difference between developed and developing countries. Developed countries generally show both higher GDP per capita and higher life expectancy, whereas developing countries tend to have lower values for both indicators. This pattern suggests that higher levels of economic development are associated with better health outcomes and longer lives.
+
+```{r}
+library(tidyverse)
+
+setwd("~/Documents/GitHub/Group-6-assignment")
+
+combined_data <- readRDS("combined_data.rds")
+
+glimpse(combined_data)
+subpop_data <- combined_data %>%
+  mutate(
+    development_group = ifelse(
+      gdp_per_capita >= 20000,
+      "Developed countries",
+      "Developing countries"
+    )
+  )
+ggplot(subpop_data, aes(
+  x = gdp_per_capita,
+  y = life_expectancy,
+  color = development_group
+)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(
+    title = "GDP per Capita and Life Expectancy by Development Group",
+    subtitle = "Comparison between developed and developing countries",
+    x = "GDP per capita",
+    y = "Life expectancy",
+    color = "Development group",
+    caption = "Source: World Bank indicators"
+  ) +
+  theme_minimal()
+  ggsave(
+  "sub_population_analysis.png",
+  width = 8,
+  height = 5,
+  dpi = 300
+)
+```
+
+
+
+
 What is the poverty rate by state?
 
-```{r visualise_subpopulations}
-dataset$inmetro <- dataset$inmetro %>% as.factor()
-# Boxplot of poverty rate by state using the 'midwest' dataset
-ggplot(dataset, aes(x = inmetro, y = percadultpoverty)) +
-  geom_boxplot() +
-  labs(
-    title = "Distribution of Poverty Rates by Metropolitan status (Midwest counties)",
-    x = "Metropolitan Area",
-    y = "Poverty Rate of Adults (%)"
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "right"
-  )
-```
 
 Here you provide a description of why the plot above is relevant to your specific social problem.
 
