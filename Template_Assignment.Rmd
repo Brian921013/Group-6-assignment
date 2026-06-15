@@ -3,9 +3,9 @@ title: "GDP and life expectancy globally between countries over the years"
 author: "null"
 date: "`r Sys.Date()`"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 Thea von Sydow 2882066
@@ -111,7 +111,7 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 
 ## 2.1 Cleaning data
 
-```{r}
+```{r include=FALSE}
 library(readr)
 
 gdp_raw <- read_csv(
@@ -243,7 +243,7 @@ saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 
 
-```{r}
+```{r include=FALSE}
 #merge the data and make the plots
 #install.packages("tidyverse")
 library(tidyverse)
