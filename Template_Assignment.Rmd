@@ -88,7 +88,6 @@ library(readr)
 #write_csv(a_fun_name, "data/gezondheid_changed.csv")
 ```
 
-midwest is an example dataset included in the tidyverse package
 
 ## 2.2 Provide a short summary of the dataset(s)
 
@@ -159,7 +158,6 @@ saveRDS(gdp_10countries, "gdp_10countries.rds")
 
 ```
 
-Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
 
 
 
