@@ -450,6 +450,37 @@ Here you provide a description of why the plot above is relevant to your specifi
 Analyze the relationship between two variables.
 
 ```{r analysis}
+library(ggplot2)
+library(dplyr)
+
+combined_data <- readRDS("combined_data.rds")
+slope_data <- combined_data %>%
+  filter(year %in% c(2019, 2020))
+
+ggplot(slope_data, aes(x = factor(year), y = life_expectancy, group = country)) +
+  geom_line(color = "red4", linewidth = 0.6) +
+  geom_point(color = "red4", size = 2) +
+  
+  geom_text(                                          # ← ADD THIS BLOCK
+    data = slope_data %>% filter(year == 2020),
+    aes(label = country),
+    hjust = -0.1,
+    color = "red4",
+    size = 3
+  ) +
+
+  scale_y_continuous(limits = c(70, 85)) +
+  
+  labs(
+    title = "Life Expectancy Before and After COVID-19 Outbreak (2019 → 2020)",
+    subtitle = "Comparison between 10 selected countries",
+    x = "Year",
+    y = "Life Expectancy",
+    caption = "Source: World Bank indicators"
+  ) +
+  theme_minimal()
+
+ggsave("slope_life_expectancy_before&after.png", width = 8, height = 5, dpi = 300)
 
 ```
 
