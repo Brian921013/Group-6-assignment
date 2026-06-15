@@ -2,18 +2,20 @@
 title: "GDP and life expectancy globally between countries over the years"
 author: "Studentnames and studentnumbers here"
 date: "`r Sys.Date()`"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 bibliography: references.bib
 csl: apa.csl
-
 ---
 
 # Set-up your environment
 
 ```{r package_install, include=FALSE}
-install.packages("tidyverse")
-install.packages("WDI")
-install.packages("tmap")
+#install.packages("tidyverse")
+#install.packages("WDI")
+#install.packages("tmap")
 require(tidyverse)
 require(rmarkdown)
 require(yaml)
