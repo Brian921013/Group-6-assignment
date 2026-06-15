@@ -248,8 +248,26 @@ saveRDS(
 ```
 
 
+#makeing the scatter plot
+
+## 3.2 Generate necessary variables
+
+Variable 1
+
+```{r gen_var1}
+
+```
+
+Variable 2
+
+```{r gen_var2}
+
+```
+
+## 3.3 Visualize temporal variation
+
+Figure X shows the average life expectancy of the selected 10 countries between 2019 and 2023. Average life expectancy declined from 2019 to 2021, reaching its lowest point in 2021 at around 74.0 years. After 2021, it increased again and reached the highest level in 2023, at about 75.5 years. This pattern suggests a temporary decline followed by recovery. One possible explanation is that the decline around 2020–2021 may be related to global health disruptions, but further evidence would be needed to confirm this.
 ```{r}
-#plotting average of 10 countries life expectancy
 library(ggplot2)
 library(dplyr)
 
@@ -270,15 +288,12 @@ ggplot(avg_life, aes(x = year, y = avg_life_expectancy)) +
     y = "Average Life Expectancy"
   )
 ggsave("average_life_expectancy.png", width = 8, height = 5, dpi = 300)
-
-#explanation:Average life expectancy across the ten selected countries declined from approximately 75.3 years in 2019 to 74.0 years in 2021. It subsequently recovered and reached approximately 75.5 years in 2023. The decline coincides with the COVID-19 pandemic period, although this descriptive figure alone cannot establish a causal relationship.
 ```
 
+## 3.4 Visualize spatial variation
+Figure X visualises the spatial variation in GDP per capita across the 10 selected countries in 2023. The map shows that GDP per capita is not evenly distributed across regions. Countries such as the United States, Australia, Sweden, and Japan have relatively high GDP per capita, while countries such as Nigeria, India, and South Africa show lower values. The life expectancy labels also suggest a similar regional pattern: countries with higher GDP per capita generally tend to have longer life expectancy. However, some differences remain between countries, indicating that economic development is not the only factor affecting health outcomes.
 
-
-```{r}
-#Spatial variation visualised
-
+```{r visualise_map}
 combined_data <- readRDS("combined_data.rds")
 library(dplyr)
 library(ggplot2)
@@ -371,35 +386,6 @@ ggsave(
   height = 7,
   dpi = 300
 )
-```
-
-
-#makeing the scatter plot
-
-## 3.2 Generate necessary variables
-
-Variable 1
-
-```{r gen_var1}
-
-```
-
-Variable 2
-
-```{r gen_var2}
-
-```
-
-## 3.3 Visualize temporal variation
-
-```{r}
-
-```
-
-## 3.4 Visualize spatial variation
-
-```{r visualise_map}
-
 ```
 
 Here you provide a description of why the plot above is relevant to your specific social problem.
