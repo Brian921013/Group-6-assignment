@@ -1,14 +1,22 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
-author: "Studentnames and studentnumbers here"
+author: "null"
 date: "`r Sys.Date()`"
 output:
+<<<<<<< HEAD
   pdf_document: default
   html_document:
     df_print: paged
 bibliography: references.bib
 csl: apa.csl
+=======
+  html_document:
+    df_print: paged
+>>>>>>> f94c76ba887586a5a2a170d0afdf389cf6064296
 ---
+
+Thea von Sydow 2882066
+
 
 # Set-up your environment
 
@@ -28,51 +36,62 @@ library(readxl)
 A new sentence
 Include your names
 
-Include the tutorial group number
-3.6
-Include your tutorial lecturer's name
-Chantal Schouwenaar
+Tutorial group: 3.6
+
+Tutorial lecturer: Chantal Schouwenaar
+
 # Part 1 - Identify a Social Problem
-Use APA referencing throughout your document. [Here's a link to some explanation.](https://www.mendeley.com/guides/apa-citation-guide/)
+
 ## 1.1 Describe the Social Problem
 
-Include the following:
+Differences in life expectancy between countries are one of the clearest forms of 
+global inequality. A child born in a high-income country can expect to live around 
+fifteen to twenty years longer than a child born in a low-income country, and this 
+gap has persisted for decades. The classic explanation links population health to 
+national income: (Preston, 1975) showed that life expectancy rises steeply with GDP 
+per capita at low income levels and flattens among richer countries, which implies 
+that economic growth buys the most health where countries are poorest (Deaton, 2003)]. 
+A key lever for policy is therefore knowing how tightly health follows income, 
+because that determines whether health gaps should be fought with economic 
+development, with health spending, or both.
 
--   Why is this relevant? [@smith2020]
+What is less well established is how this relationship behaves during a global 
+shock. The COVID-19 pandemic caused the first worldwide drop in life expectancy 
+in decades, and the losses were very unequal between countries (Schöley, 2022), 
+yet income alone did not fully predict who lost the most. In this report we 
+quantify the relationship between GDP per capita and life expectancy for ten 
+countries across all income levels between 2019 and 2023, and we examine how 
+life expectancy changed around the 2020 outbreak of the COVID-19 pandemic.
 
--   ...
-# Part 2 - Data Sourcing
+# Part 2 - Data Sourcing<
 
 ## 2.1 Load in the data
 
 Preferably from a URL, but if not, make sure to download the data and store it in a shared location that you can load the data in from. Do not store the data in a folder you include in the Github repository!
 
-```{r loading_data}
+```{r loading_data, include=FALSE}
 #dataset <- midwest
 
 library(readr)
 #Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800 <- #read_delim("~/Downloads/Gezondheid__leefstijl__zorggebruik_en__aanbod__doodsoorzaken__kerncijfers_03062026_132800.csv", 
 #    delim = ";", escape_double = FALSE, trim_ws = TRUE, 
 #    skip = 4)
-#View(Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800)
+###View(Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800)
 
 #write_csv(Gezondheid_leefstijl_zorggebruik_en_aanbod_doodsoorzaken_kerncijfers_03062026_132800, "data/gezondheid.csv")
 
-a_fun_name <- read_delim("data/gezondheid.csv")
+#a_fun_name <- read_delim("data/gezondheid.csv")
 
-a_fun_name$...1 <- NULL
+#a_fun_name$...1 <- NULL
 
 
-write_csv(a_fun_name, "data/gezondheid_changed.csv")
+#write_csv(a_fun_name, "data/gezondheid_changed.csv")
 ```
 
 midwest is an example dataset included in the tidyverse package
 
 ## 2.2 Provide a short summary of the dataset(s)
 
-```{r}
-head(dataset)
-```
 
 In this case we see 28 variables, but we miss some information on what units they are in. We also don't know anything about the year/moment in which this data has been captured.
 
@@ -83,7 +102,7 @@ In this case we see 28 variables, but we miss some information on what units the
 library(readr)
 API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 <- read_csv("API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv", 
     skip = 3)
-View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
+###View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
 
 #change data name:
 library(readr)
@@ -93,7 +112,7 @@ gdp_raw <- read_csv(
   skip = 3
 )
 
-View(gdp_raw)
+###View(gdp_raw)
 
 # cleaning the data for 10 countries and 5 years
 library(dplyr)
@@ -109,7 +128,6 @@ gdp_selected <- gdp_raw %>%
     `2023`
   )
 
-View(gdp_selected)
 
 #Filter selected countries
 selected_countries <- c(
@@ -128,7 +146,6 @@ selected_countries <- c(
 gdp_10countries <- gdp_selected %>%
   filter(country_code %in% selected_countries)
 
-View(gdp_10countries)
 
 
 saveRDS(gdp_10countries, "gdp_10countries.rds")
@@ -149,11 +166,6 @@ Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_26
 
 life_raw <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", skip = 3)
 
-View(life_raw)
-
-#installing package
-
-install.packages("tidyverse")
 
 #filtering 5 years for life expectancy
 
@@ -170,7 +182,6 @@ life_select <- life_raw %>%
     "2022",
     "2023")
 
-View(life_select)
 
 #filtering 10 countries for life expectancy
 
@@ -190,7 +201,6 @@ selected_countries <- c(
 life_expectancy_10countries <- life_select %>%
   filter(country_code %in% selected_countries)
 
-View(life_expectancy_10countries)
 
 saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
@@ -209,9 +219,8 @@ library(tidyverse)
 gdp_10countries <- readRDS("gdp_10countries.rds")
 
 life_expectancy_10countries <- readRDS("life_expectancy.rds")
-View(gdp_10countries)
+##View(gdp_10countries)
 
-View(life_expectancy_10countries)
 
 #Convert GDP data to long format
 gdp_long <- gdp_10countries %>%
@@ -220,7 +229,6 @@ gdp_long <- gdp_10countries %>%
     names_to = "year",
     values_to = "gdp_per_capita"
   )
-View(gdp_long)
 
 #Convert life expectancy data to long format
 life_long <- life_expectancy_10countries %>%
@@ -229,7 +237,6 @@ life_long <- life_expectancy_10countries %>%
     names_to = "year",
     values_to = "life_expectancy"
   )
-View(life_long)
 
 #combine 2 data sets
 combined_data <- gdp_long %>%
@@ -240,7 +247,6 @@ combined_data <- gdp_long %>%
   mutate(
     year = as.numeric(year)
   )
-view(combined_data)
 
 saveRDS(
   combined_data,
@@ -271,15 +277,111 @@ ggplot(avg_life, aes(x = year, y = avg_life_expectancy)) +
     y = "Average Life Expectancy"
   )
 ggsave("average_life_expectancy.png", width = 8, height = 5, dpi = 300)
+
+#explanation:Average life expectancy across the ten selected countries declined from approximately 75.3 years in 2019 to 74.0 years in 2021. It subsequently recovered and reached approximately 75.5 years in 2023. The decline coincides with the COVID-19 pandemic period, although this descriptive figure alone cannot establish a causal relationship.
 ```
 
 
 
+```{r}
+#Spatial variation visualised
+
+combined_data <- readRDS("combined_data.rds")
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(countrycode)
+library(scales)
+
+combined_data <- readRDS("combined_data.rds")
+
+latest_year <- max(combined_data$year, na.rm = TRUE)
+
+map_data <- combined_data %>%
+  filter(year == latest_year) %>%
+  mutate(
+    iso3 = countrycode(
+      country,
+      origin = "country.name",
+      destination = "iso3c"
+    )
+  )
+
+world <- ne_countries(
+  scale = "medium",
+  returnclass = "sf"
+)
+
+world_gdp <- world %>%
+  left_join(
+    map_data,
+    by = c("iso_a3" = "iso3")
+  )
+
+country_labels <- world_gdp %>%
+  filter(!is.na(gdp_per_capita)) %>%
+  st_point_on_surface()
+
+gdp_map <- ggplot(world_gdp) +
+  geom_sf(
+    aes(fill = gdp_per_capita),
+    linewidth = 0.15
+  ) +
+  geom_sf_text(
+    data = country_labels,
+    aes(
+      label = paste0(
+        name_long,
+        "\nLE: ",
+        round(life_expectancy, 1),
+        " years"
+      )
+    ),
+    size = 2.5,
+    check_overlap = TRUE
+  ) +
+  scale_fill_viridis_c(
+    labels = label_dollar(
+      accuracy = 1,
+      big.mark = ","
+    ),
+    na.value = "grey90",
+    name = "GDP per capita\n(US$)"
+  ) +
+  labs(
+    title = paste0(
+      "GDP per Capita Across 10 Selected Countries (",
+      latest_year,
+      ")"
+    ),
+    subtitle = "Map colours indicate GDP per capita; labels show life expectancy",
+    caption = "Source: cleaned and merged dataset. Authors' own calculations."
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = "right"
+  )
+
+gdp_map
+
+dir.create("output", showWarnings = FALSE)
+
+ggsave(
+  "gdp_per_capita_map.png",
+  plot = gdp_map,
+  width = 13,
+  height = 7,
+  dpi = 300
+)
+```
 
 
 #makeing the scatter plot
-
-```
 
 ## 3.2 Generate necessary variables
 
@@ -311,23 +413,52 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 ## 3.5 Visualize sub-population variation
 
+The graph highlights a clear difference between developed and developing countries. Developed countries generally show both higher GDP per capita and higher life expectancy, whereas developing countries tend to have lower values for both indicators. This pattern suggests that higher levels of economic development are associated with better health outcomes and longer lives.
+
+```{r}
+library(tidyverse)
+
+setwd("~/Documents/GitHub/Group-6-assignment")
+
+combined_data <- readRDS("combined_data.rds")
+
+glimpse(combined_data)
+subpop_data <- combined_data %>%
+  mutate(
+    development_group = ifelse(
+      gdp_per_capita >= 20000,
+      "Developed countries",
+      "Developing countries"
+    )
+  )
+ggplot(subpop_data, aes(
+  x = gdp_per_capita,
+  y = life_expectancy,
+  color = development_group
+)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(
+    title = "GDP per Capita and Life Expectancy by Development Group",
+    subtitle = "Comparison between developed and developing countries",
+    x = "GDP per capita",
+    y = "Life expectancy",
+    color = "Development group",
+    caption = "Source: World Bank indicators"
+  ) +
+  theme_minimal()
+  ggsave(
+  "sub_population_analysis.png",
+  width = 8,
+  height = 5,
+  dpi = 300
+)
+```
+
+
+
+
 What is the poverty rate by state?
 
-```{r visualise_subpopulations}
-dataset$inmetro <- dataset$inmetro %>% as.factor()
-# Boxplot of poverty rate by state using the 'midwest' dataset
-ggplot(dataset, aes(x = inmetro, y = percadultpoverty)) +
-  geom_boxplot() +
-  labs(
-    title = "Distribution of Poverty Rates by Metropolitan status (Midwest counties)",
-    x = "Metropolitan Area",
-    y = "Poverty Rate of Adults (%)"
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "right"
-  )
-```
 
 Here you provide a description of why the plot above is relevant to your specific social problem.
 
@@ -342,8 +473,8 @@ Analyze the relationship between two variables.
 Here you provide a description of why the plot above is relevant to your specific social problem.
 
 # Part 4 - Discussion
-
 ## 4.1 Discuss your findings
+The results of this analysis show a clear relationship between GDP per capita and life expectancy across the ten selected countries between 2019 and 2023. Countries with higher GDP per capita generally demonstrated higher life expectancy, suggesting that stronger economies are associated with better healthcare systems, living conditions, and overall population health. The temporal analysis also showed a decline in average life expectancy between 2019 and 2021, followed by a recovery by 2023, which may reflect the global impact of the COVID-19 pandemic. In addition, the comparison between developed and developing countries highlighted persistent inequalities, indicating that economic development remains an important factor in explaining differences in health outcomes, although other external factors can also influence population well-being.
 
 # Part 5 - Reproducibility
 
@@ -353,4 +484,12 @@ Provide the link to your PUBLIC repository here: ...
 
 ## 5.2 Reference list
 
-Use APA referencing throughout your document.
+Cutler, D., Deaton, A., & Lleras-Muney, A. (2006). The determinants of mortality. Journal of Economic Perspectives, 20(3), 97–120. https://doi.org/10.1257/jep.20.3.97
+
+Deaton, A. (2003). Health, inequality, and economic development. Journal of Economic Literature, 41(1), 113–158. https://doi.org/10.1257/002205103321544710
+
+Preston, S. H. (1975). The changing relation between mortality and level of economic development. Population Studies, 29(2), 231–248. https://doi.org/10.1080/00324728.1975.10410201
+
+Schöley, J., Aburto, J. M., Kashnitsky, I., Kniffka, M. S., Zhang, L., Jaadla, H., Dowd, J. B., & Kashyap, R. (2022). Life expectancy changes since COVID-19. Nature Human Behaviour, 6, 1649–1659. https://doi.org/10.1038/s41562-022-01450-3
+
+World Health Organization. (2023). World health statistics 2023: Monitoring health for the SDGs. https://www.who.int/publications/i/item/9789240074323
