@@ -1,7 +1,7 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
-author: "null"
 date: "`r Sys.Date()`"
+author: "PfE class 2026"
 output:
   html_document:
     df_print: paged
@@ -100,24 +100,19 @@ After reshaping both files into long format and merging them on country and year
 library(readr)
 API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 <- read_csv("API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv", 
     skip = 3)
+###View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
 
-library(readr)
-Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
-
-
-```
-
-Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
-
-## 2.1 Cleaning data
-
-```{r include=FALSE}
+#change data name:
 library(readr)
 
 gdp_raw <- read_csv(
   "API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv",
   skip = 3
 )
+
+###View(gdp_raw)
+
+# cleaning the data for 10 countries and 5 years
 library(dplyr)
 
 gdp_selected <- gdp_raw %>%
@@ -153,49 +148,16 @@ gdp_10countries <- gdp_selected %>%
 
 saveRDS(gdp_10countries, "gdp_10countries.rds")
 
+
+```
+
+
+
+
+```{r}
+
 library(readr)
 Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
-
-#changing the name of data life expectancy
-
-life_raw <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", skip = 3)
-
-#filtering 5 years for life expectancy
-
-library(tidyverse)
-library(dplyr)
-
-life_select <- life_raw %>%
-  select(
-    country = "Country Name",
-    country_code = "Country Code",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023")
-
-
-#filtering 10 countries for life expectancy
-
-selected_countries <- c(
-  "USA",
-  "NLD",
-  "DEU",
-  "JPN",
-  "CHN",
-  "IND",
-  "BRA",
-  "ZAF",
-  "NGA",
-  "AUS"
-)
-
-life_expectancy_10countries <- life_select %>%
-  filter(country_code %in% selected_countries)
-
-
-saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 #changing the name of data life expectancy
 
@@ -243,7 +205,10 @@ saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 
 
-```{r include=FALSE}
+
+
+
+```{r}
 #merge the data and make the plots
 #install.packages("tidyverse")
 library(tidyverse)
@@ -337,10 +302,10 @@ combined_data <- readRDS("combined_data.rds")
 library(dplyr)
 library(ggplot2)
 library(sf)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(countrycode)
-library(scales)
+require(rnaturalearth)
+require(rnaturalearthdata)
+require(countrycode)
+require(scales)
 
 combined_data <- readRDS("combined_data.rds")
 
@@ -481,8 +446,7 @@ What is the poverty rate by state?
 Here you provide a description of why the plot above is relevant to your specific social problem.
 
 ## 3.6 Event analysis
-	A surge in COVID-19 cases severely impacted death rates from 2019 to 2023. Documented global life expectancy dropped causing the collapse of public health worldwide. During the 2020 lockdown, global GDP declined and after 2021 it has recovered. 
-
+	A surge in COVID-19 cases severely impacted death rates from 2019 to 2023. During initial COVID-19 crisis, life expectancy was driven primarily on population age, government support and healthcare structure rather than GDP per capita. During COVID-19 pandemic documented global life expectancy dropped causing the collapse of public health worldwide. During the 2020 lockdown, global GDP per capita declined significantly and after 2021 it has recovered, however, the recovery time of life expectancy has been unequal across different countries. This indicates the causal limit in health and wealth. 
 Analyze the relationship between two variables.
 
 ```{r analysis}
@@ -510,5 +474,7 @@ Deaton, A. (2003). Health, inequality, and economic development. Journal of Econ
 Preston, S. H. (1975). The changing relation between mortality and level of economic development. Population Studies, 29(2), 231–248. https://doi.org/10.1080/00324728.1975.10410201
 
 Schöley, J., Aburto, J. M., Kashnitsky, I., Kniffka, M. S., Zhang, L., Jaadla, H., Dowd, J. B., & Kashyap, R. (2022). Life expectancy changes since COVID-19. Nature Human Behaviour, 6, 1649–1659. https://doi.org/10.1038/s41562-022-01450-3
+
+Global Life Expectancy Declines for First Time in 30 Years | Think Global Health. (2024). Council on Foreign Relations. https://www.thinkglobalhealth.org/article/global-life-expectancy-declines-first-time-30-years
 
 World Health Organization. (2023). World health statistics 2023: Monitoring health for the SDGs. https://www.who.int/publications/i/item/9789240074323
