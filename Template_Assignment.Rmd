@@ -94,19 +94,24 @@ In this case we see 28 variables, but we miss some information on what units the
 library(readr)
 API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 <- read_csv("API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv", 
     skip = 3)
-###View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
 
-#change data name:
+library(readr)
+Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
+
+
+```
+
+Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
+
+## 2.1 Cleaning data
+
+```{r}
 library(readr)
 
 gdp_raw <- read_csv(
   "API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv",
   skip = 3
 )
-
-###View(gdp_raw)
-
-# cleaning the data for 10 countries and 5 years
 library(dplyr)
 
 gdp_selected <- gdp_raw %>%
@@ -142,17 +147,49 @@ gdp_10countries <- gdp_selected %>%
 
 saveRDS(gdp_10countries, "gdp_10countries.rds")
 
-
-```
-
-Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
-
-
-
-```{r}
-
 library(readr)
 Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
+
+#changing the name of data life expectancy
+
+life_raw <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv", skip = 3)
+
+#filtering 5 years for life expectancy
+
+library(tidyverse)
+library(dplyr)
+
+life_select <- life_raw %>%
+  select(
+    country = "Country Name",
+    country_code = "Country Code",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023")
+
+
+#filtering 10 countries for life expectancy
+
+selected_countries <- c(
+  "USA",
+  "NLD",
+  "DEU",
+  "JPN",
+  "CHN",
+  "IND",
+  "BRA",
+  "ZAF",
+  "NGA",
+  "AUS"
+)
+
+life_expectancy_10countries <- life_select %>%
+  filter(country_code %in% selected_countries)
+
+
+saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 #changing the name of data life expectancy
 
@@ -197,9 +234,6 @@ life_expectancy_10countries <- life_select %>%
 saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 ```
-
-
-
 
 
 

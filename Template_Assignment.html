@@ -1692,10 +1692,28 @@ API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 &lt;- read_csv(&quot;API_NY/API_NY.GDP.
 ## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
 ## Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ## • `` -&gt; `...71`</code></pre>
-<pre class="r"><code>###View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
-
-#change data name:
-library(readr)
+<pre class="r"><code>library(readr)
+Life_Expectancy_raw_data &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv&quot;)</code></pre>
+<pre><code>## New names:
+## • `` -&gt; `...3`</code></pre>
+<pre><code>## Warning: One or more parsing issues, call `problems()` on your data frame for details,
+## e.g.:
+##   dat &lt;- vroom(...)
+##   problems(dat)</code></pre>
+<pre><code>## Rows: 268 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (3): Data Source, World Development Indicators, ...3
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Please use a separate ‘R block’ of code for each type of cleaning.
+So, e.g. one for missing values, a new one for removing unnecessary
+variables etc.</p>
+</div>
+<div id="cleaning-data" class="section level2">
+<h2>2.1 Cleaning data</h2>
+<pre class="r"><code>library(readr)
 
 gdp_raw &lt;- read_csv(
   &quot;API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv&quot;,
@@ -1711,10 +1729,7 @@ gdp_raw &lt;- read_csv(
 ## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
 ## Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ## • `` -&gt; `...71`</code></pre>
-<pre class="r"><code>###View(gdp_raw)
-
-# cleaning the data for 10 countries and 5 years
-library(dplyr)
+<pre class="r"><code>library(dplyr)
 
 gdp_selected &lt;- gdp_raw %&gt;%
   select(
@@ -1747,11 +1762,9 @@ gdp_10countries &lt;- gdp_selected %&gt;%
 
 
 
-saveRDS(gdp_10countries, &quot;gdp_10countries.rds&quot;)</code></pre>
-<p>Please use a separate ‘R block’ of code for each type of cleaning.
-So, e.g. one for missing values, a new one for removing unnecessary
-variables etc.</p>
-<pre class="r"><code>library(readr)
+saveRDS(gdp_10countries, &quot;gdp_10countries.rds&quot;)
+
+library(readr)
 Life_Expectancy_raw_data &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv&quot;)</code></pre>
 <pre><code>## New names:
 ## • `` -&gt; `...3`</code></pre>
@@ -1767,6 +1780,56 @@ Life_Expectancy_raw_data &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_c
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>#changing the name of data life expectancy
+
+life_raw &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv&quot;, skip = 3)</code></pre>
+<pre><code>## New names:
+## Rows: 266 Columns: 71
+## ── Column specification
+## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
+## (4): Country Name, Country Code, Indicator Name, Indicator Code dbl (65): 1960,
+## 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ... lgl (2): 2025,
+## ...71
+## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## • `` -&gt; `...71`</code></pre>
+<pre class="r"><code>#filtering 5 years for life expectancy
+
+library(tidyverse)
+library(dplyr)
+
+life_select &lt;- life_raw %&gt;%
+  select(
+    country = &quot;Country Name&quot;,
+    country_code = &quot;Country Code&quot;,
+    &quot;2019&quot;,
+    &quot;2020&quot;,
+    &quot;2021&quot;,
+    &quot;2022&quot;,
+    &quot;2023&quot;)
+
+
+#filtering 10 countries for life expectancy
+
+selected_countries &lt;- c(
+  &quot;USA&quot;,
+  &quot;NLD&quot;,
+  &quot;DEU&quot;,
+  &quot;JPN&quot;,
+  &quot;CHN&quot;,
+  &quot;IND&quot;,
+  &quot;BRA&quot;,
+  &quot;ZAF&quot;,
+  &quot;NGA&quot;,
+  &quot;AUS&quot;
+)
+
+life_expectancy_10countries &lt;- life_select %&gt;%
+  filter(country_code %in% selected_countries)
+
+
+saveRDS(life_expectancy_10countries, &quot;life_expectancy.rds&quot;)
+
+#changing the name of data life expectancy
 
 life_raw &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv&quot;, skip = 3)</code></pre>
 <pre><code>## New names:
