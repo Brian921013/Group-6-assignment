@@ -94,7 +94,7 @@ In their raw form, each file has one row per economy (around 260 countries and r
 After reshaping both files into long format and merging them on country and year, the final working dataset (combined_data) has 50 observations (10 countries across 5 years) and five columns: country, country_code, year, gdp_per_capita in constant international dollars, and life_expectancy in years.
 
 
-```{r}
+```{r include=FALSE}
 
 
 library(readr)
@@ -154,7 +154,7 @@ saveRDS(gdp_10countries, "gdp_10countries.rds")
 
 
 
-```{r}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 
 library(readr)
 Life_Expectancy_raw_data <- read_csv("API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv")
@@ -208,7 +208,7 @@ saveRDS(life_expectancy_10countries, "life_expectancy.rds")
 
 
 
-```{r}
+```{r include=FALSE}
 #merge the data and make the plots
 #install.packages("tidyverse")
 library(tidyverse)
@@ -271,7 +271,7 @@ Variable 2
 ## 3.3 Visualize temporal variation
 
 Figure X shows the average life expectancy of the selected 10 countries between 2019 and 2023. Average life expectancy declined from 2019 to 2021, reaching its lowest point in 2021 at around 74.0 years. After 2021, it increased again and reached the highest level in 2023, at about 75.5 years. This pattern suggests a temporary decline followed by recovery. One possible explanation is that the decline around 2020–2021 may be related to global health disruptions, but further evidence would be needed to confirm this.
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(dplyr)
 
@@ -297,7 +297,7 @@ ggsave("average_life_expectancy.png", width = 8, height = 5, dpi = 300)
 ## 3.4 Visualize spatial variation
 Figure X visualises the spatial variation in GDP per capita across the 10 selected countries in 2023. The map shows that GDP per capita is not evenly distributed across regions. Countries such as the United States, Australia, Sweden, and Japan have relatively high GDP per capita, while countries such as Nigeria, India, and South Africa show lower values. The life expectancy labels also suggest a similar regional pattern: countries with higher GDP per capita generally tend to have longer life expectancy. However, some differences remain between countries, indicating that economic development is not the only factor affecting health outcomes.
 
-```{r visualise_map}
+```{r visualise_map, echo=FALSE, message=FALSE, warning=FALSE}
 combined_data <- readRDS("combined_data.rds")
 library(dplyr)
 library(ggplot2)
@@ -398,7 +398,7 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 The graph highlights a clear difference between developed and developing countries. Developed countries generally show both higher GDP per capita and higher life expectancy, whereas developing countries tend to have lower values for both indicators. This pattern suggests that higher levels of economic development are associated with better health outcomes and longer lives.
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 setwd("~/Documents/GitHub/Group-6-assignment")
@@ -450,7 +450,7 @@ The initial COVID-19 outbreak occurred in December 2019. This slope graph indica
 
 Analyze the relationship between two variables.
 
-```{r analysis}
+```{r analysis, echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(dplyr)
 
