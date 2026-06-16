@@ -1,17 +1,10 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
 date: "`r Sys.Date()`"
+author: "PfE class 2026"
 output:
-<<<<<<< HEAD
-  pdf_document: default
   html_document:
     df_print: paged
-bibliography: references.bib
-csl: apa.csl
-=======
-  html_document:
-    df_print: paged
->>>>>>> f94c76ba887586a5a2a170d0afdf389cf6064296
   pdf_document: default
 ---
 
@@ -309,10 +302,10 @@ combined_data <- readRDS("combined_data.rds")
 library(dplyr)
 library(ggplot2)
 library(sf)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(countrycode)
-library(scales)
+require(rnaturalearth)
+require(rnaturalearthdata)
+require(countrycode)
+require(scales)
 
 combined_data <- readRDS("combined_data.rds")
 
@@ -453,11 +446,42 @@ What is the poverty rate by state?
 Here you provide a description of why the plot above is relevant to your specific social problem.
 
 ## 3.6 Event analysis
-	A surge in COVID-19 cases severely impacted death rates from 2019 to 2023. Documented global life expectancy dropped causing the collapse of public health worldwide. During the 2020 lockdown, global GDP declined and after 2021 it has recovered. 
+The initial COVID-19 outbreak occurred in December 2019. This slope graph indicates how life expectancy changed before and after the COVID-19 outbreak from 2019 and 2020 for 10 selected countries. The year 2019 shows pre-pandemic and 2020 shows post-outbreak. A surge in COVID-19 cases negatively impacted public health and GDP per capita worldwide during COVID-19 crisis and recovery time has been unequal across different countries. This graph demonstrates that while countries with higher GDP per capita maintained higher life expectancy in general, during the initial COVID-19 crisis, life expectancy was driven not only solely on GDP per capita, but also on population age, government support and healthcare structure.
 
 Analyze the relationship between two variables.
 
 ```{r analysis}
+library(ggplot2)
+library(dplyr)
+
+combined_data <- readRDS("combined_data.rds")
+slope_data <- combined_data %>%
+  filter(year %in% c(2019, 2020))
+
+ggplot(slope_data, aes(x = factor(year), y = life_expectancy, group = country)) +
+  geom_line(color = "red4", linewidth = 0.6) +
+  geom_point(color = "red4", size = 2) +
+  
+  geom_text(                                          # ← ADD THIS BLOCK
+    data = slope_data %>% filter(year == 2020),
+    aes(label = country),
+    hjust = -0.1,
+    color = "red4",
+    size = 3
+  ) +
+
+  scale_y_continuous(limits = c(70, 85)) +
+  
+  labs(
+    title = "Life Expectancy Before and After COVID-19 Outbreak (2019 → 2020)",
+    subtitle = "Comparison between 10 selected countries",
+    x = "Year",
+    y = "Life Expectancy",
+    caption = "Source: World Bank indicators"
+  ) +
+  theme_minimal()
+
+ggsave("slope_life_expectancy_before&after.png", width = 8, height = 5, dpi = 300)
 
 ```
 
@@ -482,5 +506,9 @@ Deaton, A. (2003). Health, inequality, and economic development. Journal of Econ
 Preston, S. H. (1975). The changing relation between mortality and level of economic development. Population Studies, 29(2), 231–248. https://doi.org/10.1080/00324728.1975.10410201
 
 Schöley, J., Aburto, J. M., Kashnitsky, I., Kniffka, M. S., Zhang, L., Jaadla, H., Dowd, J. B., & Kashyap, R. (2022). Life expectancy changes since COVID-19. Nature Human Behaviour, 6, 1649–1659. https://doi.org/10.1038/s41562-022-01450-3
+
+Global Life Expectancy Declines for First Time in 30 Years | Think Global Health. (2024). Council on Foreign Relations. https://www.thinkglobalhealth.org/article/global-life-expectancy-declines-first-time-30-years
+
+Wieland, V. (2022). Overview of how major economies have responded to the Covid-19 pandemic. https://www.europarl.europa.eu/RegData/etudes/STUD/2022/689450/IPOL_STU(2022)689450_EN.pdf
 
 World Health Organization. (2023). World health statistics 2023: Monitoring health for the SDGs. https://www.who.int/publications/i/item/9789240074323

@@ -1672,13 +1672,34 @@ around the 2020 outbreak of the COVID-19 pandemic.</p>
 <p>Preferably from a URL, but if not, make sure to download the data and
 store it in a shared location that you can load the data in from. Do not
 store the data in a folder you include in the Github repository!</p>
-<p>midwest is an example dataset included in the tidyverse package</p>
 </div>
 <div id="provide-a-short-summary-of-the-datasets" class="section level2">
 <h2>2.2 Provide a short summary of the dataset(s)</h2>
-<p>In this case we see 28 variables, but we miss some information on
-what units they are in. We also don’t know anything about the
-year/moment in which this data has been captured.</p>
+<p>This analysis uses two datasets from the World Bank’s World
+Development Indicators. Both were downloaded as CSV files, and each can
+also be identified by its WDI indicator code.</p>
+<p>The first dataset reports GDP per capita, PPP, in constant
+international dollars (indicator NY.GDP.PCAP.PP.KD). Measuring income in
+purchasing power parity terms and holding prices constant means GDP per
+capita can be compared fairly between countries and across years,
+without being thrown off by exchange rate swings or inflation.</p>
+<p>The second dataset reports life expectancy at birth, total, in years
+(indicator SP.DYN.LE00.IN). This is the average number of years a
+newborn would live if the mortality patterns of that year stayed the
+same throughout its life.</p>
+<p>In their raw form, each file has one row per economy (around 260
+countries and regional aggregates) and one column per year going back to
+1960, plus identifier columns for country name, country code, and
+indicator name and code. For this report we narrowed the data down to
+ten countries that cover a range of income levels: the United States,
+the Netherlands, Germany, Japan, China, India, Brazil, South Africa,
+Nigeria, and Australia. We also limited it to the five years from 2019
+to 2023, which is the window around the COVID-19 outbreak. After
+reshaping both files into long format and merging them on country and
+year, the final working dataset (combined_data) has 50 observations (10
+countries across 5 years) and five columns: country, country_code, year,
+gdp_per_capita in constant international dollars, and life_expectancy in
+years.</p>
 <pre class="r"><code>library(readr)
 API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 &lt;- read_csv(&quot;API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv&quot;, 
     skip = 3)</code></pre>
@@ -1692,65 +1713,6 @@ API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700 &lt;- read_csv(&quot;API_NY/API_NY.GDP.
 ## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
 ## Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ## • `` -&gt; `...71`</code></pre>
-<pre class="r"><code>###View(API_NY_GDP_PCAP_PP_KD_DS2_en_csv_v2_1700)
-
-#change data name:
-library(readr)
-
-gdp_raw &lt;- read_csv(
-  &quot;API_NY/API_NY.GDP.PCAP.PP.KD_DS2_en_csv_v2_1700.csv&quot;,
-  skip = 3
-)</code></pre>
-<pre><code>## New names:
-## Rows: 266 Columns: 71
-## ── Column specification
-## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-## (4): Country Name, Country Code, Indicator Name, Indicator Code dbl (35): 1990,
-## 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, ... lgl (32): 1960,
-## 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ...
-## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-## Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## • `` -&gt; `...71`</code></pre>
-<pre class="r"><code>###View(gdp_raw)
-
-# cleaning the data for 10 countries and 5 years
-library(dplyr)
-
-gdp_selected &lt;- gdp_raw %&gt;%
-  select(
-    country = `Country Name`,
-    country_code = `Country Code`,
-    `2019`,
-    `2020`,
-    `2021`,
-    `2022`,
-    `2023`
-  )
-
-
-#Filter selected countries
-selected_countries &lt;- c(
-  &quot;USA&quot;,
-  &quot;NLD&quot;,
-  &quot;DEU&quot;,
-  &quot;JPN&quot;,
-  &quot;CHN&quot;,
-  &quot;IND&quot;,
-  &quot;BRA&quot;,
-  &quot;ZAF&quot;,
-  &quot;NGA&quot;,
-  &quot;AUS&quot;
-)
-
-gdp_10countries &lt;- gdp_selected %&gt;%
-  filter(country_code %in% selected_countries)
-
-
-
-saveRDS(gdp_10countries, &quot;gdp_10countries.rds&quot;)</code></pre>
-<p>Please use a separate ‘R block’ of code for each type of cleaning.
-So, e.g. one for missing values, a new one for removing unnecessary
-variables etc.</p>
 <pre class="r"><code>library(readr)
 Life_Expectancy_raw_data &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv&quot;)</code></pre>
 <pre><code>## New names:
@@ -1766,95 +1728,12 @@ Life_Expectancy_raw_data &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_c
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>#changing the name of data life expectancy
-
-life_raw &lt;- read_csv(&quot;API_SP/API_SP.DYN.LE00.IN_DS2_en_csv_v2_265357.csv&quot;, skip = 3)</code></pre>
-<pre><code>## New names:
-## Rows: 266 Columns: 71
-## ── Column specification
-## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-## (4): Country Name, Country Code, Indicator Name, Indicator Code dbl (65): 1960,
-## 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, ... lgl (2): 2025,
-## ...71
-## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-## Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## • `` -&gt; `...71`</code></pre>
-<pre class="r"><code>#filtering 5 years for life expectancy
-
-library(tidyverse)
-library(dplyr)
-
-life_select &lt;- life_raw %&gt;%
-  select(
-    country = &quot;Country Name&quot;,
-    country_code = &quot;Country Code&quot;,
-    &quot;2019&quot;,
-    &quot;2020&quot;,
-    &quot;2021&quot;,
-    &quot;2022&quot;,
-    &quot;2023&quot;)
-
-
-#filtering 10 countries for life expectancy
-
-selected_countries &lt;- c(
-  &quot;USA&quot;,
-  &quot;NLD&quot;,
-  &quot;DEU&quot;,
-  &quot;JPN&quot;,
-  &quot;CHN&quot;,
-  &quot;IND&quot;,
-  &quot;BRA&quot;,
-  &quot;ZAF&quot;,
-  &quot;NGA&quot;,
-  &quot;AUS&quot;
-)
-
-life_expectancy_10countries &lt;- life_select %&gt;%
-  filter(country_code %in% selected_countries)
-
-
-saveRDS(life_expectancy_10countries, &quot;life_expectancy.rds&quot;)</code></pre>
-<pre class="r"><code>#merge the data and make the plots
-#install.packages(&quot;tidyverse&quot;)
-library(tidyverse)
-
-gdp_10countries &lt;- readRDS(&quot;gdp_10countries.rds&quot;)
-
-life_expectancy_10countries &lt;- readRDS(&quot;life_expectancy.rds&quot;)
-##View(gdp_10countries)
-
-
-#Convert GDP data to long format
-gdp_long &lt;- gdp_10countries %&gt;%
-  pivot_longer(
-    cols = `2019`:`2023`,
-    names_to = &quot;year&quot;,
-    values_to = &quot;gdp_per_capita&quot;
-  )
-
-#Convert life expectancy data to long format
-life_long &lt;- life_expectancy_10countries %&gt;%
-  pivot_longer(
-    cols = `2019`:`2023`,
-    names_to = &quot;year&quot;,
-    values_to = &quot;life_expectancy&quot;
-  )
-
-#combine 2 data sets
-combined_data &lt;- gdp_long %&gt;%
-  left_join(
-    life_long,
-    by = c(&quot;country&quot;, &quot;country_code&quot;, &quot;year&quot;)
-  ) %&gt;%
-  mutate(
-    year = as.numeric(year)
-  )
-
-saveRDS(
-  combined_data,
-  &quot;combined_data.rds&quot;
-)</code></pre>
+<p>Please use a separate ‘R block’ of code for each type of cleaning.
+So, e.g. one for missing values, a new one for removing unnecessary
+variables etc.</p>
+</div>
+<div id="cleaning-data" class="section level2">
+<h2>2.1 Cleaning data</h2>
 <p>#makeing the scatter plot</p>
 </div>
 <div id="generate-necessary-variables" class="section level2">
@@ -2081,6 +1960,7 @@ your specific social problem.</p>
 </div>
 <div id="event-analysis" class="section level2">
 <h2>3.6 Event analysis</h2>
+<pre><code>A surge in COVID-19 cases severely impacted death rates from 2019 to 2023. Documented global life expectancy dropped causing the collapse of public health worldwide. During the 2020 lockdown, global GDP declined and after 2021 it has recovered. </code></pre>
 <p>Analyze the relationship between two variables.</p>
 <p>Here you provide a description of why the plot above is relevant to
 your specific social problem.</p>
@@ -2090,6 +1970,19 @@ your specific social problem.</p>
 <h1>Part 4 - Discussion</h1>
 <div id="discuss-your-findings" class="section level2">
 <h2>4.1 Discuss your findings</h2>
+<p>The results of this analysis show a clear relationship between GDP
+per capita and life expectancy across the ten selected countries between
+2019 and 2023. Countries with higher GDP per capita generally
+demonstrated higher life expectancy, suggesting that stronger economies
+are associated with better healthcare systems, living conditions, and
+overall population health. The temporal analysis also showed a decline
+in average life expectancy between 2019 and 2021, followed by a recovery
+by 2023, which may reflect the global impact of the COVID-19 pandemic.
+In addition, the comparison between developed and developing countries
+highlighted persistent inequalities, indicating that economic
+development remains an important factor in explaining differences in
+health outcomes, although other external factors can also influence
+population well-being.</p>
 </div>
 </div>
 <div id="part-5---reproducibility" class="section level1">
