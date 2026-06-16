@@ -1635,7 +1635,8 @@ countries over the years</h1>
 </div>
 <div id="title-page" class="section level1">
 <h1>Title Page</h1>
-<p>A new sentence Include your names</p>
+<p>Group members:Egemen Çivici, Eunji Hong, EnChi Hsu(Brian), Rares
+Raţiu, Barna Sebestyén, Thea Von Sydow</p>
 <p>Tutorial group: 3.6</p>
 <p>Tutorial lecturer: Chantal Schouwenaar</p>
 </div>
@@ -1701,6 +1702,9 @@ countries across 5 years) and five columns: country, country_code, year,
 gdp_per_capita in constant international dollars, and life_expectancy in
 years.</p>
 </div>
+</div>
+<div id="part-3---our-findings" class="section level1">
+<h1>Part 3 - Our findings</h1>
 <div id="describe-the-variables" class="section level2">
 <h2>3.1 Describe the variables</h2>
 <p>After cleaning and merging the datasets, the final dataset contains
@@ -1721,28 +1725,11 @@ categorical variables. First, we constructed development_group, which
 classifies the ten selected countries into developed and developing
 countries. This variable was used in the sub-population analysis to
 compare GDP per capita and life expectancy across different development
-groups. Second, we created covid_period, which classifies the years into
-pre-COVID, COVID period, and post-COVID recovery. This variable was used
-to analyse how average life expectancy changed before, during, and after
-the COVID-19 pandemic.</p>
-<pre class="r"><code>combined_data &lt;- combined_data %&gt;%
-  mutate(
-    development_group = case_when(
-      country %in% c(&quot;United States&quot;, &quot;Australia&quot;, &quot;Netherlands&quot;, &quot;Sweden&quot;, &quot;Japan&quot;) ~ &quot;Developed countries&quot;,
-      country %in% c(&quot;China&quot;, &quot;India&quot;, &quot;Brazil&quot;, &quot;South Africa&quot;, &quot;Nigeria&quot;) ~ &quot;Developing countries&quot;,
-      TRUE ~ NA_character_
-    )
-  )</code></pre>
-<p>Variable 2</p>
-<pre class="r"><code>combined_data &lt;- combined_data %&gt;%
-  mutate(
-    covid_period = case_when(
-      year == 2019 ~ &quot;Pre-COVID&quot;,
-      year %in% c(2020, 2021) ~ &quot;COVID period&quot;,
-      year %in% c(2022, 2023) ~ &quot;Post-COVID recovery&quot;,
-      TRUE ~ NA_character_
-    )
-  )</code></pre>
+groups.</p>
+<p>Variable 2 Second, we created covid_period, which classifies the
+years into pre-COVID, COVID period, and post-COVID recovery. This
+variable was used to analyse how average life expectancy changed before,
+during, and after the COVID-19 pandemic.</p>
 </div>
 <div id="visualize-temporal-variation" class="section level2">
 <h2>3.3 Visualize temporal variation</h2>
@@ -1834,7 +1821,7 @@ population well-being.</p>
 <h1>Part 5 - Reproducibility</h1>
 <div id="github-repository-link" class="section level2">
 <h2>5.1 Github repository link</h2>
-<p>Provide the link to your PUBLIC repository here: …</p>
+<p>Provide the link to your PUBLIC repository here: <a href="https://github.com/Brian921013/Group-6-assignment" class="uri">https://github.com/Brian921013/Group-6-assignment</a></p>
 </div>
 <div id="reference-list" class="section level2">
 <h2>5.2 Reference list</h2>
