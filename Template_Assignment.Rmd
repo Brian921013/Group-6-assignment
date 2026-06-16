@@ -446,7 +446,7 @@ What is the poverty rate by state?
 Here you provide a description of why the plot above is relevant to your specific social problem.
 
 ## 3.6 Event analysis
-The initial COVID-19 outbreak occurred in December 2019. This slope graph indicates how life expectancy changed before and after the COVID-19 outbreak from 2019 and 2020 for 10 selected countries. The year 2019 shows pre-pandemic and 2020 shows post-outbreak. This graph demonstrates that while countries with higher GDP per capita maintained higher life expectancy in general, during the initial COVID-19 crisis, life expectancy was driven not only solely on GDP per capita, but also on population age, government support and healthcare structure.
+The initial COVID-19 outbreak occurred in December 2019. This slope graph indicates how life expectancy changed before and after the COVID-19 outbreak from 2019 and 2020 for 10 selected countries. The year 2019 shows pre-pandemic and 2020 shows post-outbreak. A surge in COVID-19 cases negatively impacted public health and GDP per capita worldwide during COVID-19 crisis and recovery time has been unequal across different countries. This graph demonstrates that while countries with higher GDP per capita maintained higher life expectancy in general, during the initial COVID-19 crisis, life expectancy was driven not only solely on GDP per capita, but also on population age, government support and healthcare structure.
 
 Analyze the relationship between two variables.
 
