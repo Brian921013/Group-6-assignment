@@ -252,20 +252,36 @@ saveRDS(
 ```
 
 
-#makeing the scatter plot
+## 3.1 Describe the variables
+After cleaning and merging the datasets, the final dataset contains information on 10 selected countries from 2019 to 2023. The main variables are country, year, GDP per capita, and life expectancy. In addition to these original variables, we created two new categorical variables to support our analysis. The variable development_group separates countries into developed and developing countries, which is used for the sub-population comparison. The variable covid_period divides the years into pre-COVID, COVID period, and post-COVID recovery, which is used to analyse the effect of the COVID-19 period on life expectancy.
 
 ## 3.2 Generate necessary variables
 
 Variable 1
-
+To add analytical value to the dataset, we created two new categorical variables. First, we constructed development_group, which classifies the ten selected countries into developed and developing countries. This variable was used in the sub-population analysis to compare GDP per capita and life expectancy across different development groups. Second, we created covid_period, which classifies the years into pre-COVID, COVID period, and post-COVID recovery. This variable was used to analyse how average life expectancy changed before, during, and after the COVID-19 pandemic.
 ```{r gen_var1}
-
+combined_data <- combined_data %>%
+  mutate(
+    development_group = case_when(
+      country %in% c("United States", "Australia", "Netherlands", "Sweden", "Japan") ~ "Developed countries",
+      country %in% c("China", "India", "Brazil", "South Africa", "Nigeria") ~ "Developing countries",
+      TRUE ~ NA_character_
+    )
+  )
 ```
 
 Variable 2
 
 ```{r gen_var2}
-
+combined_data <- combined_data %>%
+  mutate(
+    covid_period = case_when(
+      year == 2019 ~ "Pre-COVID",
+      year %in% c(2020, 2021) ~ "COVID period",
+      year %in% c(2022, 2023) ~ "Post-COVID recovery",
+      TRUE ~ NA_character_
+    )
+  )
 ```
 
 ## 3.3 Visualize temporal variation

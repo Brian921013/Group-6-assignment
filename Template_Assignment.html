@@ -1700,12 +1700,49 @@ year, the final working dataset (combined_data) has 50 observations (10
 countries across 5 years) and five columns: country, country_code, year,
 gdp_per_capita in constant international dollars, and life_expectancy in
 years.</p>
-<p>#makeing the scatter plot</p>
+</div>
+<div id="describe-the-variables" class="section level2">
+<h2>3.1 Describe the variables</h2>
+<p>After cleaning and merging the datasets, the final dataset contains
+information on 10 selected countries from 2019 to 2023. The main
+variables are country, year, GDP per capita, and life expectancy. In
+addition to these original variables, we created two new categorical
+variables to support our analysis. The variable development_group
+separates countries into developed and developing countries, which is
+used for the sub-population comparison. The variable covid_period
+divides the years into pre-COVID, COVID period, and post-COVID recovery,
+which is used to analyse the effect of the COVID-19 period on life
+expectancy.</p>
 </div>
 <div id="generate-necessary-variables" class="section level2">
 <h2>3.2 Generate necessary variables</h2>
-<p>Variable 1</p>
+<p>Variable 1 To add analytical value to the dataset, we created two new
+categorical variables. First, we constructed development_group, which
+classifies the ten selected countries into developed and developing
+countries. This variable was used in the sub-population analysis to
+compare GDP per capita and life expectancy across different development
+groups. Second, we created covid_period, which classifies the years into
+pre-COVID, COVID period, and post-COVID recovery. This variable was used
+to analyse how average life expectancy changed before, during, and after
+the COVID-19 pandemic.</p>
+<pre class="r"><code>combined_data &lt;- combined_data %&gt;%
+  mutate(
+    development_group = case_when(
+      country %in% c(&quot;United States&quot;, &quot;Australia&quot;, &quot;Netherlands&quot;, &quot;Sweden&quot;, &quot;Japan&quot;) ~ &quot;Developed countries&quot;,
+      country %in% c(&quot;China&quot;, &quot;India&quot;, &quot;Brazil&quot;, &quot;South Africa&quot;, &quot;Nigeria&quot;) ~ &quot;Developing countries&quot;,
+      TRUE ~ NA_character_
+    )
+  )</code></pre>
 <p>Variable 2</p>
+<pre class="r"><code>combined_data &lt;- combined_data %&gt;%
+  mutate(
+    covid_period = case_when(
+      year == 2019 ~ &quot;Pre-COVID&quot;,
+      year %in% c(2020, 2021) ~ &quot;COVID period&quot;,
+      year %in% c(2022, 2023) ~ &quot;Post-COVID recovery&quot;,
+      TRUE ~ NA_character_
+    )
+  )</code></pre>
 </div>
 <div id="visualize-temporal-variation" class="section level2">
 <h2>3.3 Visualize temporal variation</h2>
