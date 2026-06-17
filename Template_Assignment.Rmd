@@ -8,8 +8,6 @@ output:
     df_print: paged
 ---
 
-Thea von Sydow 2882066
-
 
 # Set-up your environment
 
@@ -26,7 +24,7 @@ library(readxl)
 ```
 
 # Title Page
-Group members:Egemen Çivici, Eunji Hong, EnChi Hsu(Brian), Rares Raţiu, Barna Sebestyén, Thea Von Sydow
+Group members:Egemen Çivici, Eunji Hong, EnChi Hsu(Brian), Stefan Rares Raţiu, Barna Sebestyén, Thea Von Sydow
 
 Tutorial group: 3.6
 
@@ -55,7 +53,7 @@ quantify the relationship between GDP per capita and life expectancy for ten
 countries across all income levels between 2019 and 2023, and we examine how 
 life expectancy changed around the 2020 outbreak of the COVID-19 pandemic.
 
-# Part 2 - Data Sourcing<
+# Part 2 - Data Sourcing
 
 ## 2.1 Load in the data
 
