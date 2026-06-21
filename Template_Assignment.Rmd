@@ -23,7 +23,7 @@ library(readxl)
 ```
 
 # Title Page
-Group members:Egemen Çivici, Eunji Hong, EnChi Hsu(Brian), Stefan Rares Raţiu, Barna Sebestyén, Thea von Sydow (2882066)
+Group members:Egemen Çivici, Eunji Hong (2891930), EnChi Hsu(Brian), Stefan Rares Raţiu, Barna Sebestyén, Thea von Sydow (2882066)
 
 Tutorial group: 3.6
 
