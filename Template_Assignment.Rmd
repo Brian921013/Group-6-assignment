@@ -1,9 +1,15 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
 date: "`r Sys.Date()`"
-author: "PfE class 2026"
+author: "PfE Group members: Egemen Çivici, Eunji Hong (2891930), EnChi Hsu(Brian), Stefan Rares Raţiu (2848193), Barna Sebestyén, Thea von Sydow (2882066)
+
+Tutorial group: 3.6
+
+Tutorial lecturer: Chantal Schouwenaar"
 output:
-  pdf_document: default
+  pdf_document:
+    toc: true
+    toc_depth: 2
   html_document:
     df_print: paged
 ---
@@ -22,12 +28,7 @@ library(writexl)
 library(readxl)
 ```
 
-# Title Page
-Group members:Egemen Çivici, Eunji Hong (2891930), EnChi Hsu(Brian), Stefan Rares Raţiu, Barna Sebestyén, Thea von Sydow (2882066)
 
-Tutorial group: 3.6
-
-Tutorial lecturer: Chantal Schouwenaar
 
 # Part 1 - Identify a Social Problem
 
@@ -53,8 +54,6 @@ countries across all income levels between 2019 and 2023, and we examine how
 life expectancy changed around the 2020 outbreak of the COVID-19 pandemic.
 
 # Part 2 - Data Sourcing
-
-## 2.1 Load in the data
 
 ## 2.1 Load in the data
 
