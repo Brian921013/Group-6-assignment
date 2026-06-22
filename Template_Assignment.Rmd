@@ -1,9 +1,18 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
+author:
+  - "Egemen Çivici (2884172)"
+  - "Eunji Hong (2891930)"
+  - "EnChi Hsu (Brian) (2857940)"
+  - "Stefan Rares Ratiu (2848193)"
+  - "Barna Sebestyén (2896448)"
+  - "Thea von Sydow (2882066)"
 date: "`r Sys.Date()`"
-author: "PfE class 2026"
+
 output:
-  pdf_document: default
+  pdf_document:
+    toc: true
+    toc_depth: 2
   html_document:
     df_print: paged
 ---
@@ -22,18 +31,6 @@ library(writexl)
 library(readxl)
 ```
 
-# Title Page
-Group members:
-Egemen Çivici 2884172
-Eunji Hong 2891930
-EnChi Hsu(Brian) 2857940
-Stefan Rares Raţiu 2848193
-Barna Sebestyén 2896448
-Thea von Sydow 2882066
-
-Tutorial group: 3.6
-
-Tutorial lecturer: Chantal Schouwenaar
 
 # Part 1 - Identify a Social Problem
 
@@ -59,8 +56,6 @@ countries across all income levels between 2019 and 2023, and we examine how
 life expectancy changed around the 2020 outbreak of the COVID-19 pandemic.
 
 # Part 2 - Data Sourcing
-
-## 2.1 Load in the data
 
 ## 2.1 Load in the data
 
@@ -469,7 +464,6 @@ ggplot(subpop_data, aes(
 ## 3.6 Event analysis
 The initial COVID-19 outbreak occurred in December 2019. This slope graph indicates how life expectancy changed before and after the COVID-19 outbreak from 2019 and 2020 for 10 selected countries. The year 2019 shows pre-pandemic and 2020 shows post-outbreak. A surge in COVID-19 cases negatively impacted public health and GDP per capita worldwide during COVID-19 crisis and recovery time has been unequal across different countries. This graph demonstrates that while countries with higher GDP per capita maintained higher life expectancy in general, during the initial COVID-19 crisis, life expectancy was driven not only solely on GDP per capita, but also on population age, government support and healthcare structure.
 
-Analyze the relationship between two variables.
 
 ```{r analysis, echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
@@ -513,7 +507,6 @@ ggsave("average_gdp_eventfinal.png", width = 8, height = 5, dpi = 300)
 
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
 
 # Part 4 - Discussion
 ## 4.1 Discuss your findings
