@@ -1,8 +1,8 @@
 ---
 title: "GDP and life expectancy globally between countries over the years"
 date: "`r Sys.Date()`"
-author: "PfE Group members: Egemen Çivici, Eunji Hong (2891930), EnChi Hsu(Brian),
-Stefan Rares Raţiu (2848193), Barna Sebestyén, Thea von Sydow (2882066)
+author: "PfE Group members: Egemen Çivici (2884172), Eunji Hong (2891930), EnChi Hsu(Brian),
+Stefan Rares Raţiu (2848193), Barna Sebestyén (2896448), Thea von Sydow (2882066)
 
 Tutorial group: 3.6
 
